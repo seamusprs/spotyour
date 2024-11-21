@@ -77,11 +77,11 @@ class Playlist(rd.Playlist):
 
 # test functions:
 testpl = Playlist("playlist")
-print(testpl.topLabel)
-print(testpl.topArtists)
-print(testpl.topGenres)
-print(testpl.shortest)
-print(testpl.longest)
-print(testpl.slowest)
-print(testpl.fastest)
+# print(testpl.topLabel)
+# print(testpl.topArtists)
+# print(testpl.topGenres)
+# print(testpl.shortest)
+# print(testpl.longest)
+# print(testpl.slowest)
+# print(testpl.fastest)
 testpl.plstats()
