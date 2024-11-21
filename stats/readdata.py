@@ -4,6 +4,8 @@ import random
 class Playlist():
 
     def __init__(self, filename):
+
+        self.filename = filename
         self.__df = pd.read_csv(filename + ".csv")
 
     def showtable(self):
@@ -19,35 +21,35 @@ class Playlist():
     
     @property
     def ids(self):
-        return self.__df["Track ID"]
+        return self.__df["Track ID"].dropna()
     
     @property
     def tracks(self):
-        return self.__df["Track Name"]
+        return self.__df["Track Name"].dropna()
     
     @property
     def albums(self):
-        return self.__df["Album Name"]
+        return self.__df["Album Name"].dropna()
     
     @property
     def artists(self):
-        return self.__df["Artist Name(s)"]
+        return self.__df["Artist Name(s)"].dropna()
     
     @property
     def releases(self):
-        return self.__df["Release Date"]
+        return self.__df["Release Date"].dropna()
     
     @property
     def durations(self):
-        return self.__df["Duration"]
+        return self.__df["Duration (ms)"].dropna()
     
     @property
     def genres(self):
-        return self.__df["Genres"]
+        return self.__df["Genres"].dropna()
     
     @property
     def labels(self):
-        return self.__df["Record Label"]
+        return self.__df["Record Label"].dropna()
     
     @property
     def tempos(self):
@@ -56,15 +58,21 @@ class Playlist():
     def getSong(self, index):
         return self.__df.iloc[index]
     
+    def getSongId(self, id):
+        if id in self.__df["Track ID"].values:
+            return self.__df[self.__df["Track ID"] == id].iloc[0]
+    
     def randSong(self):
         rand = random.randint(0, self.length)
         return self.getSong(rand)
     
 class Song():
 
-    def __init__(self, pl, index = None):
-        if isinstance(index, int):
-            self.__song = pl.getSong(index)
+    def __init__(self, pl, id = None):
+        if isinstance(id, int):
+            self.__song = pl.getSong(id)
+        elif isinstance(id, str):
+            self.__song = pl.getSongId(id)
         else:
             self.__song = pl.randSong()
 
@@ -90,7 +98,7 @@ class Song():
     
     @property
     def duration(self):
-        return self.__song["Duration"]
+        return self.__song["Duration (ms)"]
     
     @property
     def genre(self):
