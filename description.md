@@ -22,20 +22,24 @@ A package that contains two subpackages: stats and quiz. Stats allows users to g
         - fastestsong/slowestsong: returns fastest or shortest song based on tempo column
         - showallstats: returns a list of various stats
 
-  - **Subpackage**: quiz
+  - **Subpackage**: quiz: contains modules and functions to build and run the quiz for the user based on their playlist stats.
 
-    - **Module**: makequiz
+    - **Module**: makequiz: build the quiz with question libraries
 
       - **Functions**: 
-        - makequestion
-        - various functions for different question types:
-        - What artist performs this song?
-        - Which song is longest / shortest?
-        - Which artist do you have the most / fewest songs?
-        - Which song is the oldest / newest?
-        - Which of these songs is written by an X artist?
-        - Function to keep score throughout quiz
+        - getdata: randomly choose 4 song and its corresponding data (artist, album, record, length, etc.)
+        - makequestion: make a question based on the data
+            - artist_question: make a question like "Which these artists performs song X?"
+            - length_question: make a question like "Which of these songs is the longest?"
+            - age_question: make a question like "Which of these songs is the oldest?"
+            - tempo_question: make a question like "Which of these songs is the slowest?"
+        - check_answer: checks the user's input and compare it to the corresponding data.
 
-    - **Module**: playgame
+    - **Module**: playgame: run the quiz
 
-      - **Functions**: getoptions, setseed, playgame, scoreboard?
+      - **Functions**: 
+        - getoptions: shows the available options that users can choose during a quiz including question types, start quiz, end quiz.
+        - setseed: ask users to optionally set seed for reproducibility of questions.
+        - playgame: starts the quiz
+        - getscore (optional): shows the user's score
+        - scoreboard (optional): stores the user's score
