@@ -1,5 +1,5 @@
 import pandas as pd
-import readdata as rd
+import stats.readdata as rd
 
 def toMins(ms):
     totalsecs = ms // 1000
@@ -76,7 +76,7 @@ class Playlist(rd.Playlist):
         print("%s is the most represented record label with %s songs." % (self.topLabel[0], self.topLabel[1]))
 
 # test functions:
-testpl = Playlist("playlist")
+# testpl = Playlist("playlist")
 # print(testpl.topLabel)
 # print(testpl.topArtists)
 # print(testpl.topGenres)
@@ -84,4 +84,4 @@ testpl = Playlist("playlist")
 # print(testpl.longest)
 # print(testpl.slowest)
 # print(testpl.fastest)
-testpl.plstats()
+# testpl.plstats()
