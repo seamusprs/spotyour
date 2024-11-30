@@ -2,6 +2,37 @@ import random
 from spotyour.stats import readdata as rd
 
 class Question:
+    """
+    A class for a question in the quiz game.
+
+    The Question class allows for questions to be built based on the current playlist.
+    It includes functions for fetching songs, checking the desired question type,
+    and checking the validity of answers.
+
+    Parameters
+    ----------
+    playlist : Playlist
+        An instance of the 'Playlist' class that holds the playlist currently being quizzed on.
+
+    Attributes
+    ----------
+    cur_question : str
+        A string containing the question being asked of the user.
+    cur_options : list of str
+        A list of strings containing four possible solutions to the question (one correct).
+    cur_solution :
+        A string containing the correct answer to the question being asked.
+
+    Methods
+    -------
+    getdata(num_song=4):
+        Builds a list of songs randomly selected from the playlist, used as options when generating questions.
+    makequestion(question_type : str):
+        Takes the desired question type as an argument, calls the appropriate question type function,
+        and returns the question information (question, options, and solution).
+    checker(user_input, solution):
+        Compares the user input answer to the correct solution and returns True if correct, false otherwise.
+    """
     def __init__(self, playlist):
         self.playlist = playlist
         self.cur_question = None
@@ -9,6 +40,7 @@ class Question:
         self.cur_solution = None
         
     def getdata(self, num_song = 4):
+        """Builds a list of songs randomly selected from the playlist, used as options when generating questions."""
         idx = random.sample(range(self.playlist.length), num_song)
         song_list = []
         for i in idx:
@@ -16,6 +48,8 @@ class Question:
         return song_list
     
     def makequestion(self, question_type):
+        """Takes the desired question type as an argument, calls the appropriate question type function,
+        and returns the question information (question, options, and solution)."""
         qtype_def = f"{question_type}_question"
         if not hasattr(self, qtype_def):
             raise ValueError(f"Invalid question type: {qtype_def}")
@@ -26,6 +60,7 @@ class Question:
         return q, o, s
     
     def checker(self, user_input, solution):
+        """Compares the user input answer to the correct solution and returns True if correct, false otherwise."""
         return user_input == solution
 
     def __str__(self):
@@ -38,7 +73,26 @@ class Question:
         return generated_q
     
 class QuestionBuilder(Question):
+    """
+    A class for different question types in the quiz game.
+
+    Inherits from the Question class and includes methods for various types of questions.
+
+    Methods
+    -------
+    artist_question():
+        Builds a question identifying a song's artist.
+    label_question():
+        Builds a question identifying a song's record label.
+    length_question():
+        Builds a question comparing song lengths.
+    age_question():
+        Builds a question comparing song release dates.
+    tempo_question():
+        Builds a question comparing song tempos (BPM).
+    """
     def artist_question(self):
+        """Builds a question identifying a song's artist."""
         data = self.getdata()
         song = random.choice(data)
         question = f"Which artist performs the song '{song.track}'?"
@@ -51,6 +105,7 @@ class QuestionBuilder(Question):
         return question, options, song.artist
     
     def label_question(self):
+        """Builds a question identifying a song's record label."""
         data = self.getdata()
         song = random.choice(data)
         question = f"Which label publishes the song '{song.track}'?"
@@ -63,8 +118,9 @@ class QuestionBuilder(Question):
         return question, options, song.label
     
     def length_question(self):
+        """Builds a question comparing song lengths."""
         data = self.getdata()
-        question = f"Which of these song has the longest duration?"
+        question = f"Which of these songs has the longest duration?"
         temp_options = []
         options = []
         for i in data:
@@ -76,6 +132,7 @@ class QuestionBuilder(Question):
         return question, options, solution
     
     def age_question(self):
+        """Builds a question comparing song release dates."""
         data = self.getdata()
         question = f"Which of these songs is the oldest?"
         temp_options = []
@@ -89,6 +146,7 @@ class QuestionBuilder(Question):
         return question, options, solution
     
     def tempo_question(self):
+        """Builds a question comparing song tempos (BPM)."""
         data = self.getdata()
         question = f"Which of these songs has the slowest tempo?"
         temp_options = []

@@ -2,18 +2,62 @@ from .quizbuilder import QuestionBuilder
 import random
 
 class Game:
+    """
+    A class for a quiz game.
+
+    The Game class handles most aspects of conducting the quiz game, including all interactions with the user for the main game loop,
+    as well as functions such as setting a random seed, asking questions, checking solutions, and keeping score.
+
+    Parameters
+    ----------
+    playlist : Playlist
+        An instance of the 'Playlist' class that holds the playlist currently being quizzed on.
+
+    Attributes
+    ----------
+    q_builder : QuestionBuilder
+        An instance of the 'QuestionBuilder' class specific to the current playlist.
+    score : int
+        The number of questions correctly answered in the current game.
+    q_count : int
+        The number of questions asked in the current game.
+
+    Methods
+    -------
+    getoptions():
+        Returns a list of possible question types.
+    setseed():
+        Sets random seed for reproducibility in otherwise randomized actions (question order).
+    ask(q_type : str):
+        Gets a question, asks the user, and checks user input answer against correct solution.
+    getscore():
+        Prints number of correct answers and number of total questions asked.
+    play():
+        Takes the user through the main quiz game loop.
+    """
     def __init__(self, playlist):
+        """Initializes an isntance of the quiz game."""
         self.q_builder = QuestionBuilder(playlist)
         self.score = 0
         self.q_count = 0
         
     def getoptions(self):
+        """Returns a list of possible question types."""
         return ["artist", "label", "length", "age", "tempo"]
     
     def setseed(self, seed):
+        """Sets random seed for reproducibility in otherwise randomized actions (question order)."""
         random.seed(seed)
     
     def ask(self, q_type):
+        """
+        Gets a question, asks the user, and checks user input answer against correct solution.
+
+        Parameters
+        ----------
+        q_type : str
+            Question type as input by the user, defines which question type will be asked
+        """
         try:
             question, options, solution = self.q_builder.makequestion(q_type)
         except ValueError as e:
@@ -45,9 +89,11 @@ class Game:
                 continue
             
     def getscore(self):
+        """Prints number of correct answers and number of total questions asked."""
         print(f"Your current score is: {self.score}/{self.q_count}. Keep up the great work!")
 
     def play(self):
+        """Takes the user through the main quiz game loop."""
         print("----------------------")
         print("SPOT YOUR SPOTIFY: QUIZ")
         print("----------------------\n")
