@@ -1,9 +1,5 @@
-# from stats import readdata as rd
-# from stats import showstats as ss
-# import stats.readdata as rd
-# import stats.showstats as ss
-import stats.readdata as rd
 import stats.showstats as ss
+import quiz.playgame as pg
 
 print("Welcome to Spot Your Spotify!")
 print("Please select a playlist.")
@@ -28,8 +24,8 @@ while inp != "exit":
         elif inp == "stats": 
             pl.plstats()
         elif inp == "quiz": 
-            # run quiz here
-            pass
+            quiz = pg.Game(pl)
+            quiz.play()
         else:
             print("Input not accepted, please try again")
             continue
