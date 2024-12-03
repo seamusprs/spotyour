@@ -1,5 +1,5 @@
 import pandas as pd
-import stats.readdata as rd
+from spotyour.stats import readdata as rd
 
 def toMins(ms):
     """
