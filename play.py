@@ -1,5 +1,5 @@
-from spotyour.stats import showstats as ss
-from spotyour.quiz import playgame as pg
+import stats.showstats as ss
+import quiz.playgame as pg
 
 print("Welcome to Spot Your Spotify!")
 print("Please select a playlist.")
