@@ -8,7 +8,7 @@ inp = ""
 
 while inp != "exit":
     inp = input("Enter path to playlist csv without file extension: ").lower()
-    if inp == "": pl = ss.Playlist("playlist")
+    if inp == "": pl = ss.Playlist("spotyour/playlist")
     else:
         try:
             pl = ss.Playlist(inp)

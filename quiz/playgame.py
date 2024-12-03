@@ -75,11 +75,12 @@ class Game:
                     user_answer = options[user_number-1]
                     if self.q_builder.checker(user_answer, solution):
                         print("\nCongratulations! You got the correct answer!\n")
+                        self.q_count += 1
                         self.score += 1
                         break
                     else:
+                        self.q_count += 1
                         print(f"\nSorry, your answer is wrong. The correct answer is '{solution}'.\n")
-                    self.q_count += 1
                     break
                 else:
                     print("Invalid number. Please enter a number from the list!\n")
