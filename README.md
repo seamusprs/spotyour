@@ -3,7 +3,7 @@ Collaborative programming DATA 533 Project by Seamus Riordan-Short and Jason Sam
 
 ### Project idea: Personalized Spotify Playlist Stats & Quiz: Spot your Spotify.
 
-A package that contains two subpackages: stats and quiz. Stats allows users to gain insights about their Spotify playlist such as top artist, longest song, slowest song, etc. Quiz allows users to enter a game where they will be questioned on how well they know their playlist. The program will read a CSV file of the user playlist that users can obtain using Exportify.
+A package that contains two subpackages: stats and quiz. Stats allows users to gain insights about their Spotify playlist such as top artist, longest song, slowest song, etc. Quiz allows users to enter a game where they will be questioned on how well they know their playlist. The program will read a CSV file of the user playlist that users can obtain using Exportify. *For testing purposes, users can press `enter` when prompted the CSV file since a test playlist is included in the package.*
 
 **Package**: spotyourspotify
   - **Subpackage**: stats: contains all the code for parsing and analysing playlist
